@@ -19,7 +19,6 @@ type Question struct {
 
 func main() {
 	filename, timeLimit := readArguments()
-	fmt.Println(timeLimit)
 	f, err := os.Open(filename)
 	if err != nil {
 		fmt.Println("Unable to open the target file")
@@ -90,7 +89,7 @@ func startAskingQuestions(questions []Question, timeLimit int) (int, error) {
 	for _, question := range questions {
 		ans, err := eachQuestion(question.question, question.answer, userAns, timer.C)
 		if int(ans) == -1 {
-			return score, fmt.Errorf("time out")
+			return score, err
 		} else if err != nil {
 
 		} else {
